@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeArcade</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0a0a1f;
+      color: #fff;
+    }
+
+    nav {
+      background: #111133;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #00ff88;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 900;
+      color: #00ff88;
+      letter-spacing: 2px;
+      cursor: pointer;
+    }
+
+    .logo span {
+      color: #ff0099;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      color: #aaa;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: #00ff88;
+    }
+
+    .nav-btn {
+      background: #00ff88;
+      color: #0a0a1f;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      background: radial-gradient(ellipse at center, #0d0d35, #0a0a1f);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(0, 255, 136, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 136, .04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gm 20s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes gm {
+      to {
+        transform: translateY(50px);
+      }
+    }
+
+    .hero-tag {
+      position: relative;
+      z-index: 2;
+      font-size: 12px;
+      font-weight: 700;
+      color: #00ff88;
+      border: 1px solid #00ff88;
+      background: rgba(0, 255, 136, .1);
+      border-radius: 30px;
+      padding: 8px 20px;
+      margin-bottom: 25px;
+      letter-spacing: 2px;
+    }
+
+    .hero h1 {
+      position: relative;
+      z-index: 2;
+      font-size: 72px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      margin-bottom: 15px;
+    }
+
+    .green {
+      display: block;
+      color: #00ff88;
+      text-shadow: 0 0 30px rgba(0, 255, 136, .5);
+      animation: gl 3s ease-in-out infinite;
+    }
+
+    @keyframes gl {
+
+      0%,
+      100% {
+        text-shadow: 0 0 30px rgba(0, 255, 136, .5)
+      }
+
+      50% {
+        text-shadow: 0 0 60px rgba(0, 212, 255, .8)
+      }
+    }
+
+    .sub {
+      display: block;
+      font-size: 18px;
+      color: rgba(255, 255, 255, .3);
+      letter-spacing: 8px;
+      margin-top: 10px;
+    }
+
+    .hero p {
+      position: relative;
+      z-index: 2;
+      font-size: 18px;
+      color: #888;
+      max-width: 550px;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .hero p b {
+      color: #ffe600;
+    }
+
+    .hero-btns {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-g {
+      background: linear-gradient(135deg, #00ff88, #00d4ff);
+      color: #0a0a1f;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform .2s;
+    }
+
+    .btn-g:hover {
+      transform: translateY(-4px);
+    }
+
+    .btn-p {
+      background: transparent;
+      color: #ff0099;
+      border: 2px solid #ff0099;
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .btn-p:hover {
+      background: rgba(255, 0, 153, .1);
+      transform: translateY(-4px);
+    }
+
+    .stats {
+      background: #0d0d28;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      border-top: 1px solid rgba(0, 255, 136, .2);
+      border-bottom: 1px solid rgba(0, 255, 136, .2);
+    }
+
+    .stat {
+      padding: 30px 50px;
+      text-align: center;
+      border-right: 1px solid rgba(255, 255, 255, .05);
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat-num {
+      display: block;
+      font-size: 36px;
+      font-weight: 900;
+      color: #00ff88;
+      text-shadow: 0 0 15px #00ff88;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: #555;
+      margin-top: 5px;
+      font-weight: 700;
+    }
+
+    .sec {
+      padding: 80px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .sec-tag {
+      display: block;
+      font-size: 12px;
+      color: #ff0099;
+      letter-spacing: 3px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .sec-title {
+      font-size: 36px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .sec-sub {
+      color: #555;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 40px;
+      max-width: 540px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #111133;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .08);
+      cursor: pointer;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #00ff88;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, .5);
+    }
+
+    .card-ph {
+      width: 100%;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .card-lang {
+      font-size: 11px;
+      font-weight: 900;
+      color: #00d4ff;
+      background: rgba(0, 212, 255, .1);
+      border: 1px solid rgba(0, 212, 255, .3);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .diff {
+      font-size: 11px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-left: auto;
+    }
+
+    .easy {
+      background: rgba(0, 255, 136, .15);
+      color: #00ff88;
+      border: 1px solid #00ff88;
+    }
+
+    .med {
+      background: rgba(255, 230, 0, .15);
+      color: #ffe600;
+      border: 1px solid #ffe600;
+    }
+
+    .hard {
+      background: rgba(255, 0, 153, .15);
+      color: #ff0099;
+      border: 1px solid #ff0099;
+    }
+
+    .leg {
+      background: rgba(180, 77, 255, .15);
+      color: #b44dff;
+      border: 1px solid #b44dff;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .xp {
+      font-size: 12px;
+      font-weight: 900;
+      color: #ffe600;
+      background: rgba(255, 230, 0, .1);
+      border: 1px solid rgba(255, 230, 0, .3);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .cbtn {
+      font-size: 12px;
+      font-weight: 900;
+      color: #00ff88;
+      background: rgba(0, 255, 136, .1);
+      border: 1px solid rgba(0, 255, 136, .3);
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .cbtn:hover {
+      background: rgba(0, 255, 136, .25);
+    }
+
+    .ed-sec {
+      background: #0d0d28;
+      padding: 80px 20px;
+      border-top: 1px solid rgba(0, 255, 136, .15);
+      border-bottom: 1px solid rgba(0, 255, 136, .15);
+    }
+
+    .ed-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .ed-box {
+      background: #0c0c22;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 255, 136, .25);
+    }
+
+    .ed-top {
+      background: #111133;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+    }
+
+    .dot.r {
+      background: #ff5f57
+    }
+
+    .dot.y {
+      background: #febc2e
+    }
+
+    .dot.g {
+      background: #28c840
+    }
+
+    .ed-title {
+      font-weight: 900;
+      font-size: 15px;
+      color: #fff;
+    }
+
+    .ch-sel {
+      background: #1a1a40;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, .15);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .ed-tabs {
+      display: flex;
+      background: #0a0a1e;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .ed-tab {
+      padding: 12px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #555;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      border-bottom: 2px solid transparent;
+      transition: all .2s;
+    }
+
+    .ed-tab.active {
+      color: #00ff88;
+      border-bottom-color: #00ff88;
+      background: rgba(0, 255, 136, .05);
+    }
+
+    .ed-tab:hover:not(.active) {
+      color: #fff;
+    }
+
+    .ed-body {
+      display: flex;
+      height: 380px;
+      overflow: hidden;
+    }
+
+    .ed-side {
+      width: 250px;
+      background: #08081c;
+      border-right: 1px solid rgba(255, 255, 255, .06);
+      padding: 16px;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    .ed-side h3 {
+      font-size: 15px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .ed-side p {
+      color: #555;
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .slist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .slist li {
+      font-family: monospace;
+      font-size: 13px;
+      color: #ddd;
+      background: rgba(255, 255, 255, .04);
+      padding: 8px 10px;
+      border-radius: 8px;
+      border-left: 2px solid #00ff88;
+    }
+
+    .hlist {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hint {
+      background: rgba(255, 230, 0, .06);
+      border: 1px solid rgba(255, 230, 0, .2);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #ffe600;
+    }
+
+    .ed-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .code-wrap {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lnums {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 45px;
+      background: #07071a;
+      padding: 12px 0;
+      text-align: right;
+      color: #2a2a4a;
+      font-family: monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      overflow: hidden;
+      user-select: none;
+      border-right: 1px solid rgba(255, 255, 255, .04);
+      z-index: 1;
+    }
+
+    .lnums span {
+      display: block;
+      padding-right: 10px;
+    }
+
+    #codeInput {
+      position: absolute;
+      inset: 0;
+      left: 45px;
+      background: transparent;
+      color: #e0e0ff;
+      font-family: monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      padding: 12px 12px 12px 10px;
+      border: none;
+      outline: none;
+      resize: none;
+      width: calc(100% - 45px);
+      height: 100%;
+      caret-color: #00ff88;
+      overflow: auto;
+    }
+
+    .out-wrap {
+      height: 140px;
+      background: #060618;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .out-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, .05);
+    }
+
+    .out-lbl {
+      font-size: 12px;
+      font-weight: 700;
+      color: #444;
+    }
+
+    .run-btn {
+      background: linear-gradient(135deg, #00ff88, #00d4ff);
+      color: #0a0a1f;
+      border: none;
+      padding: 7px 18px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .clr-btn {
+      background: transparent;
+      color: #555;
+      border: 1px solid rgba(255, 255, 255, .1);
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+
+    .clr-btn:hover {
+      color: #ff0099;
+      border-color: #ff0099;
+    }
+
+    #outText {
+      flex: 1;
+      padding: 10px 15px;
+      font-family: monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #888;
+      overflow-y: auto;
+    }
+
+    .og {
+      color: #00ff88
+    }
+
+    .ob {
+      color: #00d4ff
+    }
+
+    .ed-foot {
+      background: #111133;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-top: 1px solid rgba(255, 255, 255, .05);
+    }
+
+    .lpill {
+      font-size: 11px;
+      font-weight: 900;
+      color: #00d4ff;
+      background: rgba(0, 212, 255, .1);
+      border: 1px solid rgba(0, 212, 255, .3);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .estat {
+      font-size: 12px;
+      font-weight: 700;
+      color: #444;
+      flex: 1;
+    }
+
+    .sub-btn {
+      background: linear-gradient(135deg, #b44dff, #ff0099);
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .quiz-sec {
+      background: #0d0d28;
+      padding: 80px 20px;
+      border-top: 1px solid rgba(0, 212, 255, .15);
+      border-bottom: 1px solid rgba(0, 212, 255, .15);
+    }
+
+    .quiz-inner {
+      max-width: 660px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .quiz-box {
+      background: #111133;
+      border-radius: 20px;
+      padding: 35px;
+      border: 1px solid rgba(0, 212, 255, .2);
+    }
+
+    .qt {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .qcnt {
+      font-size: 13px;
+      font-weight: 700;
+      color: #555;
+    }
+
+    .qscr {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffe600;
+    }
+
+    .prog {
+      width: 100%;
+      height: 5px;
+      background: rgba(255, 255, 255, .06);
+      border-radius: 3px;
+      margin-bottom: 25px;
+      overflow: hidden;
+    }
+
+    .prog-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00ff88, #00d4ff);
+      border-radius: 3px;
+      transition: width .5s;
+    }
+
+    .qq {
+      font-size: 17px;
+      font-weight: 700;
+      color: #00d4ff;
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+
+    .q-opts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .qopt {
+      background: rgba(255, 255, 255, .04);
+      border: 2px solid rgba(255, 255, 255, .08);
+      color: #e0e0ff;
+      padding: 14px 10px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .qopt:hover:not(:disabled) {
+      border-color: #00d4ff;
+      background: rgba(0, 212, 255, .08);
+    }
+
+    .qopt.correct {
+      border-color: #00ff88 !important;
+      background: rgba(0, 255, 136, .12) !important;
+      color: #00ff88 !important;
+    }
+
+    .qopt.wrong {
+      border-color: #ff0099 !important;
+      background: rgba(255, 0, 153, .08) !important;
+      color: #ff0099 !important;
+    }
+
+    .qopt:disabled {
+      cursor: default;
+    }
+
+    .qfb {
+      font-size: 15px;
+      font-weight: 700;
+      min-height: 25px;
+      margin-bottom: 8px;
+    }
+
+    .qst {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ff6b35;
+      min-height: 20px;
+    }
+
+    .bg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+      gap: 18px;
+    }
+
+    .bc {
+      background: #111133;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .07);
+      cursor: pointer;
+      position: relative;
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .bc:hover {
+      transform: translateY(-10px) rotate(1deg);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .5);
+    }
+
+    .bimg {
+      position: relative;
+      height: 110px;
+      overflow: hidden;
+    }
+
+    .bfade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 20%, #111133 100%);
+    }
+
+    .bemoji {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      z-index: 2;
+      filter: drop-shadow(0 0 8px rgba(255, 230, 0, .6));
+      transition: transform .3s;
+    }
+
+    .bc:hover .bemoji {
+      transform: translate(-50%, -65%) scale(1.25) rotate(-8deg);
+    }
+
+    .bbody {
+      padding: 12px 14px 14px;
+    }
+
+    .bc h4 {
+      font-size: 11px;
+      font-weight: 900;
+      margin-bottom: 5px;
+      line-height: 1.6;
+    }
+
+    .bc p {
+      font-size: 12px;
+      color: #555;
+    }
+
+    .bxp {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 900;
+      margin-top: 6px;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+
+    .blk {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 10, 30, .78);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .blk span {
+      font-size: 11px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .g h4 {
+      color: #00ff88
+    }
+
+    .g .bxp {
+      color: #00ff88;
+      background: rgba(0, 255, 136, .1);
+      border: 1px solid rgba(0, 255, 136, .3)
+    }
+
+    .b h4 {
+      color: #00d4ff
+    }
+
+    .b .bxp {
+      color: #00d4ff;
+      background: rgba(0, 212, 255, .1);
+      border: 1px solid rgba(0, 212, 255, .3)
+    }
+
+    .pi h4 {
+      color: #ff0099
+    }
+
+    .pi .bxp {
+      color: #ff0099;
+      background: rgba(255, 0, 153, .1);
+      border: 1px solid rgba(255, 0, 153, .3)
+    }
+
+    .ye h4 {
+      color: #ffe600
+    }
+
+    .ye .bxp {
+      color: #ffe600;
+      background: rgba(255, 230, 0, .1);
+      border: 1px solid rgba(255, 230, 0, .3)
+    }
+
+    .pu h4 {
+      color: #b44dff
+    }
+
+    .pu .bxp {
+      color: #b44dff;
+      background: rgba(180, 77, 255, .1);
+      border: 1px solid rgba(180, 77, 255, .3)
+    }
+
+    .or h4 {
+      color: #ff6b35
+    }
+
+    .or .bxp {
+      color: #ff6b35;
+      background: rgba(255, 107, 53, .1);
+      border: 1px solid rgba(255, 107, 53, .3)
+    }
+
+    .lb-box {
+      background: #111133;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 230, 0, .15);
+    }
+
+    .lb-hd {
+      background: linear-gradient(135deg, #161630, #201428);
+      padding: 18px 30px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255, 230, 0, .1);
+    }
+
+    .lb-hd h3 {
+      font-size: 18px;
+      font-weight: 900;
+      color: #ffe600;
+    }
+
+    .lb-row {
+      display: flex;
+      align-items: center;
+      padding: 16px 30px;
+      border-bottom: 1px solid rgba(255, 255, 255, .03);
+      transition: background .2s;
+    }
+
+    .lb-row:last-child {
+      border-bottom: none;
+    }
+
+    .lb-row:hover {
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .lb-rank {
+      font-weight: 900;
+      font-size: 15px;
+      width: 50px;
+    }
+
+    .r1 {
+      color: #ffd700;
+      text-shadow: 0 0 10px #ffd700
+    }
+
+    .r2 {
+      color: #c0c0c0
+    }
+
+    .r3 {
+      color: #cd7f32
+    }
+
+    .rx {
+      color: #444
+    }
+
+    .lb-av {
+      font-size: 24px;
+      margin-right: 12px;
+    }
+
+    .lb-nm {
+      flex: 1;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .lb-xp {
+      font-size: 14px;
+      font-weight: 900;
+      color: #ffe600;
+    }
+
+    .lb-you {
+      background: rgba(0, 255, 136, .05) !important;
+      border-left: 3px solid #00ff88 !important;
+    }
+
+    .steps-g {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .step {
+      background: #111133;
+      border-radius: 14px;
+      padding: 25px;
+      border: 1px solid rgba(255, 255, 255, .06);
+      text-align: center;
+      transition: transform .3s;
+    }
+
+    .step:hover {
+      transform: translateY(-5px);
+    }
+
+    .snum {
+      font-size: 36px;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .step h3 {
+      font-size: 15px;
+      font-weight: 900;
+      color: #00d4ff;
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      color: #555;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #08081e, #14082a);
+      padding: 100px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(180, 77, 255, .2);
+    }
+
+    .cta h2 {
+      font-size: 40px;
+      font-weight: 900;
+      color: #b44dff;
+      text-shadow: 0 0 20px #b44dff;
+      line-height: 1.3;
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      color: #555;
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    footer {
+      background: #0a0a1f;
+      border-top: 1px solid rgba(0, 255, 136, .1);
+      padding: 30px;
+      text-align: center;
+    }
+
+    .flogo {
+      font-size: 20px;
+      font-weight: 900;
+      color: #00ff88;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    footer p {
+      color: #333;
+      font-size: 14px;
+    }
+
+    footer b {
+      color: #ff0099;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 9999;
+      background: #1a1a40;
+      border: 1px solid #00ff88;
+      color: #00ff88;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 14px 20px;
+      border-radius: 12px;
+      max-width: 260px;
+      line-height: 1.6;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all .3s;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      border-radius: 50%;
+      z-index: 9999;
+      animation: pb .8s ease forwards;
+    }
+
+    @keyframes pb {
+      0% {
+        opacity: 1
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0)
+      }
+    }
+
+    @media(max-width:600px) {
+      .nav-links {
+        display: none
+      }
+
+      .hero h1 {
+        font-size: 40px
+      }
+
+      .q-opts {
+        grid-template-columns: 1fr
+      }
+
+      .ed-side {
+        display: none
+      }
+
+      .stat {
+        padding: 20px 25px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="toast" id="toast"></div>
+
+  <nav>
+    <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">CODE<span>ARCADE</span></div>
+    <div class="nav-links">
+      <a href="#challenges">Challenges</a>
+      <a href="#editor">Editor</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#badges">Badges</a>
+      <a href="#lb">Leaderboard</a>
+    </div>
+    <button class="nav-btn" onclick="showToast('Welcome to CodeArcade! 🎮')">START PLAYING</button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-tag">🎮 THE ULTIMATE CODING ADVENTURE FOR KIDS</div>
+    <h1><span class="green">CODEARCADE</span><span class="sub">LEARN · PLAY · CONQUER</span></h1>
+    <p>The most epic place for kids aged <b>6 to 14</b> to learn real coding through fun challenges, a live code editor,
+      quizzes and legendary badges! 🚀</p>
+    <div class="hero-btns">
+      <button class="btn-g" onclick="document.getElementById('challenges').scrollIntoView({behavior:'smooth'})">🎯 SEE
+        CHALLENGES</button>
+      <button class="btn-p" onclick="document.getElementById('editor').scrollIntoView({behavior:'smooth'})">💻 CODE
+        EDITOR</button>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><span class="stat-num" id="sn1">0</span>
+      <div class="stat-label">🎯 Challenges</div>
+    </div>
+    <div class="stat"><span class="stat-num" id="sn2">0</span>
+      <div class="stat-label">🏆 Badges</div>
+    </div>
+    <div class="stat"><span class="stat-num" id="sn3">0</span>
+      <div class="stat-label">👾 Players</div>
+    </div>
+  </div>
+
+  <div class="sec" id="challenges">
+    <span class="sec-tag">// PICK YOUR MISSION</span>
+    <h2 class="sec-title">⚔️ EPIC CODING CHALLENGES</h2>
+    <p class="sec-sub">Click any card to load it in the code editor!</p>
+    <div class="cards">
+      <div class="card" onclick="loadChallenge(0)">
+        <div class="card-ph" style="background:#1a1a3a">🐍</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-lang">PYTHON</span><span class="diff easy">🟢 EASY</span></div>
+          <h3>BUILD A SNAKE GAME</h3>
+          <p>Code the classic Snake game! Arrow keys, eat food, grow longer.</p>
+          <div class="card-foot"><span class="xp">⭐ +150 XP</span><button class="cbtn"
+              onclick="event.stopPropagation();loadChallenge(0)">CODE IT ▶</button></div>
+        </div>
+      </div>
+      <div class="card" onclick="loadChallenge(1)">
+        <div class="card-ph" style="background:#1a2a1a">🌐</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-lang">HTML+CSS</span><span class="diff easy">🟢 EASY</span></div>
+          <h3>YOUR SUPERHERO PROFILE</h3>
+          <p>Design a glowing superhero card with powers and animated stat bars!</p>
+          <div class="card-foot"><span class="xp">⭐ +120 XP</span><button class="cbtn"
+              onclick="event.stopPropagation();loadChallenge(1)">CODE IT ▶</button></div>
+        </div>
+      </div>
+      <div class="card" onclick="loadChallenge(2)">
+        <div class="card-ph" style="background:#2a1a1a">🔐</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-lang">PYTHON</span><span class="diff med">🟡 MEDIUM</span></div>
+          <h3>PASSWORD HACKER GAME</h3>
+          <p>Hacker-themed guessing game with lives and hot/cold hints!</p>
+          <div class="card-foot"><span class="xp">⭐ +200 XP</span><button class="cbtn"
+              onclick="event.stopPropagation();loadChallenge(2)">CODE IT ▶</button></div>
+        </div>
+      </div>
+      <div class="card" onclick="loadChallenge(3)">
+        <div class="card-ph" style="background:#1a1a2a">🧠</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-lang">HTML+JS</span><span class="diff med">🟡 MEDIUM</span></div>
+          <h3>TRIVIA BATTLE ARENA</h3>
+          <p>2 player trivia game with timers and animated winner screen!</p>
+          <div class="card-foot"><span class="xp">⭐ +250 XP</span><button class="cbtn"
+              onclick="event.stopPropagation();loadChallenge(3)">CODE IT ▶</button></div>
+        </div>
+      </div>
+      <div class="card" onclick="loadChallenge(4)">
+        <div class="card-ph" style="background:#2a1a2a">🤖</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-lang">PYTHON</span><span class="diff hard">🔴 HARD</span></div>
+          <h3>BUILD YOUR OWN AI BOT</h3>
+          <p>A chatbot that tells jokes and remembers your name! 🔥</p>
+          <div class="card-foot"><span class="xp">⭐ +350 XP</span><button class="cbtn"
+              onclick="event.stopPropagation();loadChallenge(4)">CODE IT ▶</button></div>
+        </div>
+      </div>
+      <div class="card" onclick="loadChallenge(5)">
+        <div class="card-ph" style="background:#1a1a3a">🚀</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-lang">JS+CANVAS</span><span class="diff leg">👾 LEGENDARY</span></div>
+          <h3>SPACE INVADERS CLONE</h3>
+          <p>Shoot aliens, dodge bullets, endless waves. 👑</p>
+          <div class="card-foot"><span class="xp">⭐ +500 XP</span><button class="cbtn"
+              onclick="event.stopPropagation();loadChallenge(5)">CODE IT ▶</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ed-sec" id="editor">
+    <div class="ed-wrap">
+      <span class="sec-tag">// LIVE CODE PLAYGROUND</span>
+      <h2 class="sec-title">💻 CODE RIGHT HERE!</h2>
+      <p class="sec-sub" style="margin-bottom:30px">Write, run and test your code without leaving the page!</p>
+      <div class="ed-box">
+        <div class="ed-top">
+          <div class="dots">
+            <div class="dot r"></div>
+            <div class="dot y"></div>
+            <div class="dot g"></div>
+          </div>
+          <div class="ed-title" id="edTitle">Snake Game — Python</div>
+          <select class="ch-sel" id="chSel" onchange="loadChallenge(parseInt(this.value))">
+            <option value="0">🐍 Snake Game</option>
+            <option value="1">🌐 Superhero Card</option>
+            <option value="2">🔐 Hacker Game</option>
+            <option value="3">🧠 Trivia Arena</option>
+            <option value="4">🤖 AI Bot</option>
+            <option value="5">🚀 Space Invaders</option>
+            <option value="6">📝 Free Code</option>
+          </select>
+        </div>
+        <div class="ed-tabs">
+          <button class="ed-tab active" onclick="switchTab('code',this)">💻 CODE</button>
+          <button class="ed-tab" onclick="switchTab('mission',this)">📋 MISSION</button>
+          <button class="ed-tab" onclick="switchTab('hints',this)">💡 HINTS</button>
+        </div>
+        <div class="ed-body">
+          <div class="ed-side" id="mPanel" style="display:none">
+            <h3 id="mTitle">Mission</h3>
+            <p id="mDesc"></p>
+            <ul class="slist" id="mSteps"></ul>
+          </div>
+          <div class="ed-side" id="hPanel" style="display:none">
+            <h3 style="color:#ffe600;margin-bottom:12px">💡 HINTS</h3>
+            <div class="hlist" id="hList"></div>
+          </div>
+          <div class="ed-main" id="cPanel">
+            <div class="code-wrap">
+              <div class="lnums" id="lnums"></div>
+              <textarea id="codeInput" spellcheck="false" autocomplete="off" autocorrect="off"
+                autocapitalize="off"></textarea>
+            </div>
+            <div class="out-wrap">
+              <div class="out-bar">
+                <span class="out-lbl">▶ OUTPUT</span>
+                <div><button class="run-btn" onclick="runCode()">▶ RUN CODE</button><button class="clr-btn"
+                    onclick="clearOut()">✕ CLEAR</button></div>
+              </div>
+              <div id="outText"><span class="ob">// Ready! Write your code and click RUN ▶</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ed-foot">
+          <span class="lpill" id="lpill">PYTHON</span>
+          <span class="estat" id="estat">Ready — write your code and hit RUN!</span>
+          <button class="sub-btn" onclick="submitCode()">🏆 SUBMIT AND EARN XP</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quiz-sec" id="quiz">
+    <div class="quiz-inner">
+      <span class="sec-tag" style="display:block;text-align:center;margin-bottom:8px">// MINI GAME</span>
+      <h2 class="sec-title" style="text-align:center;margin-bottom:8px">🧠 CODE QUIZ BATTLE</h2>
+      <p style="text-align:center;color:#555;font-size:16px;font-weight:700;margin-bottom:30px">Answer fast, build
+        streaks and earn bonus XP!</p>
+      <div class="quiz-box">
+        <div class="qt"><span class="qcnt" id="qcnt">Q 1 of 7</span><span class="qscr">⭐ <span id="qscr">0</span>
+            XP</span></div>
+        <div class="prog">
+          <div class="prog-fill" id="pgbar" style="width:0%"></div>
+        </div>
+        <div class="qq" id="qq">Loading...</div>
+        <div class="q-opts" id="qopts"></div>
+        <div class="qfb" id="qfb"></div>
+        <div class="qst" id="qst"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="sec-tag">// THE JOURNEY</span>
+    <h2 class="sec-title">🗺️ HOW IT WORKS</h2>
+    <p class="sec-sub">Four simple steps from zero to coding legend!</p>
+    <div class="steps-g">
+      <div class="step"><span class="snum">1️⃣</span>
+        <h3>PICK A MISSION</h3>
+        <p>Choose Easy, Medium, Hard or Legendary challenges!</p>
+      </div>
+      <div class="step"><span class="snum">2️⃣</span>
+        <h3>CODE IN THE EDITOR</h3>
+        <p>Write real code and see output instantly!</p>
+      </div>
+      <div class="step"><span class="snum">3️⃣</span>
+        <h3>EARN XP AND BADGES</h3>
+        <p>Submit your code to earn XP and unlock badges!</p>
+      </div>
+      <div class="step"><span class="snum">4️⃣</span>
+        <h3>CLIMB THE RANKS</h3>
+        <p>Stack XP and become the ultimate Arcade King! 👑</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" id="badges" style="padding-top:0">
+    <span class="sec-tag">// ACHIEVEMENTS</span>
+    <h2 class="sec-title">🏆 LEGENDARY BADGES</h2>
+    <p class="sec-sub">Complete missions to unlock. Hover to see them come alive!</p>
+    <div class="bg-grid">
+      <div class="bc g" onclick="showToast('Complete your first challenge to hatch! 🥚')">
+        <div class="bimg">
+          <div
+            style="width:100%;height:110px;background:linear-gradient(135deg,#0a2a0a,#1a3a1a);display:flex;align-items:center;justify-content:center;font-size:50px">
+            💻</div>
+          <div class="bfade"></div>
+          <div class="bemoji">🥚</div>
+        </div>
+        <div class="bbody">
+          <h4>CODE HATCHLING</h4>
+          <p>First challenge done</p><span class="bxp">⭐ +50 XP</span>
+        </div>
+      </div>
+      <div class="bc or" onclick="showToast('Code 3 days in a row to unlock! 🔥')">
+        <div class="bimg">
+          <div
+            style="width:100%;height:110px;background:linear-gradient(135deg,#2a1a0a,#3a2a0a);display:flex;align-items:center;justify-content:center;font-size:50px">
+            ⚡</div>
+          <div class="bfade"></div>
+          <div class="bemoji">🔥</div>
+        </div>
+        <div class="bbody">
+          <h4>ON FIRE</h4>
+          <p>3-day coding streak</p><span class="bxp">⭐ +75 XP</span>
+        </div>
+      </div>
+      <div class="bc ye" onclick="showToast('Finish any challenge in under 5 minutes! ⚡')">
+        <div class="bimg">
+          <div
+            style="width:100%;height:110px;background:linear-gradient(135deg,#2a2a0a,#3a3a0a);display:flex;align-items:center;justify-content:center;font-size:50px">
+            🏃</div>
+          <div class="bfade"></div>
+          <div class="bemoji">⚡</div>
+        </div>
+        <div class="bbody">
+          <h4>SPEED DEMON</h4>
+          <p>Done in under 5 mins</p><span class="bxp">⭐ +100 XP</span>
+        </div>
+      </div>
+      <div class="bc b" onclick="showToast('Score 100% on any quiz to unlock! 🧠')">
+        <div class="bimg">
+          <div
+            style="width:100%;height:110px;background:linear-gradient(135deg,#0a1a2a,#0a2a3a);display:flex;align-items:center;justify-content:center;font-size:50px">
+            🎯</div>
+          <div class="bfade"></div>
+          <div class="bemoji">🧠</div>
+        </div>
+        <div class="bbody">
+          <h4>BIG BRAIN</h4>
+          <p>Perfect quiz score</p><span class="bxp">⭐ +100 XP</span>
+        </div>
+      </div>
+      <div class="bc g" onclick="showToast('Complete ALL Python challenges to unlock! 🐍')">
+        <div class="bimg">
+          <div
+            style="width:100%;height:110px;background:linear-gradient(135deg,#0a2a0a,#153a15);display:flex;align-items:center;justify-content:center;font-size:50px">
+            🐍</div>
+          <div class="bfade"></div>
+          <div class="bemoji">🐍</div>
+        </div>
+        <div class="bbody">
+          <h4>PYTHON MASTER</h4>
+          <p>All Python done</p><span class="bxp">⭐ +150 XP</span>
+        </div>
+      </div>
+      <div class="bc pi" onclick="showToast('Build and submit your first game! 🚀')">
+        <div class="bimg">
+          <div
+            style="width:100%;height:110px;background:linear-gradient(135deg,#2a0a1a,#3a0a2a);display:flex;align-items:center;justify-content:center;font-size:50px">
+            🎮</div>
+          <div class="bfade"></div>
+          <div class="bemoji">🚀</div>
+        </div>
+        <div class="bbody">
+          <h4>GAME CREATOR</h4>
+          <p>Built a real game</p><span class="bxp">⭐ +200 XP</span>
+        </div>
+      </div>
+      <div class="bc pu" onclick="showToast('Reach 2000 XP to unlock! 🔒')">
+        <div class="bimg">
+          <div
+            style="width:100%;height:110px;background:linear-gradient(135deg,#1a0a2a,#2a0a3a);display:flex;align-items:center;justify-content:center;font-size:50px;opacity:.3">
+            🕶️</div>
+          <div class="bfade"></div>
+          <div class="bemoji" style="opacity:.25">🕶️</div>
+        </div>
+        <div class="bbody">
+          <h4 style="color:#333">SHADOW CODER</h4>
+          <p>2000 XP needed</p><span class="bxp"
+            style="color:#333;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)">🔒 LOCKED</span>
+        </div>
+        <div class="blk"><span style="font-size:28px">🔒</span><span>2000 XP needed</span></div>
+      </div>
+      <div class="bc ye" onclick="showToast('Reach number 1 on leaderboard! 👑')">
+        <div class="bimg">
+          <div
+            style="width:100%;height:110px;background:linear-gradient(135deg,#2a2a0a,#3a3a0a);display:flex;align-items:center;justify-content:center;font-size:50px;opacity:.3">
+            👑</div>
+          <div class="bfade"></div>
+          <div class="bemoji" style="opacity:.25">👑</div>
+        </div>
+        <div class="bbody">
+          <h4 style="color:#333">ARCADE KING</h4>
+          <p>Be number 1</p><span class="bxp"
+            style="color:#333;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)">🔒 LOCKED</span>
+        </div>
+        <div class="blk"><span style="font-size:28px">🔒</span><span>Reach number 1</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" id="lb" style="padding-top:0">
+    <span class="sec-tag">// TOP CODERS</span>
+    <h2 class="sec-title">🏅 GLOBAL LEADERBOARD</h2>
+    <p class="sec-sub">Can YOU dethrone the number 1 spot?</p>
+    <div class="lb-box">
+      <div class="lb-hd"><span>🏆</span>
+        <h3>GLOBAL RANKINGS</h3>
+      </div>
+      <div class="lb-row"><span class="lb-rank r1">#1</span><span class="lb-av">🦁</span><span
+          class="lb-nm">CodingLion99</span><span class="lb-xp">⭐ 4200 XP</span></div>
+      <div class="lb-row"><span class="lb-rank r2">#2</span><span class="lb-av">🐉</span><span
+          class="lb-nm">DragonCoder</span><span class="lb-xp">⭐ 3850 XP</span></div>
+      <div class="lb-row"><span class="lb-rank r3">#3</span><span class="lb-av">🦊</span><span
+          class="lb-nm">FoxScript</span><span class="lb-xp">⭐ 3400 XP</span></div>
+      <div class="lb-row"><span class="lb-rank rx">#4</span><span class="lb-av">🐺</span><span
+          class="lb-nm">WolfByte</span><span class="lb-xp">⭐ 2900 XP</span></div>
+      <div class="lb-row"><span class="lb-rank rx">#5</span><span class="lb-av">🦅</span><span
+          class="lb-nm">EagleLoop</span><span class="lb-xp">⭐ 2600 XP</span></div>
+      <div class="lb-row lb-you"><span class="lb-rank" style="color:#00ff88">YOU</span><span class="lb-av">⭐</span><span
+          class="lb-nm" style="color:#00ff88">Anirudha</span><span class="lb-xp" id="myXp">⭐ 0 XP — Start now!</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h2>READY TO BECOME A CODE LEGEND? 🦸</h2>
+    <p>Join thousands of kids already leveling up on CodeArcade!</p>
+    <button class="btn-g" style="font-size:18px;padding:18px 40px"
+      onclick="showToast('Welcome aboard! 🚀');document.getElementById('challenges').scrollIntoView({behavior:'smooth'})">🚀
+      START YOUR JOURNEY</button>
+  </div>
+
+  <footer>
+    <div class="flogo">CODEARCADE</div>
+    <p>Made with ❤️ by <b>Anirudha</b> — Future Developer 🚀 | © 2025 CodeArcade</p>
+  </footer>
+
+  <script>
+    function showToast(msg) { var t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._t); t._t = setTimeout(function () { t.classList.remove('show'); }, 3000); }
+
+    var sObs = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) { cu(document.getElementById('sn1'), 500, '+'); cu(document.getElementById('sn2'), 50, '+'); cu(document.getElementById('sn3'), 10, 'K+'); sObs.disconnect(); } }); }, { threshold: 0.4 });
+    sObs.observe(document.querySelector('.stats'));
+    function cu(el, target, sfx) { var c = 0, step = Math.ceil(target / 50), t = setInterval(function () { c = Math.min(c + step, target); el.textContent = c + sfx; if (c >= target) clearInterval(t); }, 25); }
+
+    var chs = [
+      { title: 'Snake Game — Python', lang: 'PYTHON', desc: 'Build the classic Snake game in Python!', steps: ['1. Set up game window', '2. Draw snake as squares', '3. Add arrow key controls', '4. Spawn food randomly', '5. Detect food collision', '6. Detect wall/self collision'], hints: ['Use a list for snake body', 'Add new head, remove tail to move', 'random.randint() for food', 'Check head position == food'], code: '# Snake Game — Python\n# Run in IDLE, Replit or VS Code\n\nimport turtle\nimport random\n\nscreen = turtle.Screen()\nscreen.title("Snake!")\nscreen.bgcolor("black")\nscreen.setup(800, 600)\n\nhead = turtle.Turtle()\nhead.speed(0)\nhead.shape("square")\nhead.color("lime")\nhead.penup()\nhead.goto(0, 0)\nhead.direction = "stop"\n\nfood = turtle.Turtle()\nfood.speed(0)\nfood.shape("circle")\nfood.color("red")\nfood.penup()\nfood.goto(random.randint(-380,380), random.randint(-280,280))\n\ndef go_up():\n    if head.direction != "down": head.direction = "up"\ndef go_down():\n    if head.direction != "up": head.direction = "down"\ndef go_left():\n    if head.direction != "right": head.direction = "left"\ndef go_right():\n    if head.direction != "left": head.direction = "right"\n\nscreen.listen()\nscreen.onkeypress(go_up,"Up")\nscreen.onkeypress(go_down,"Down")\nscreen.onkeypress(go_left,"Left")\nscreen.onkeypress(go_right,"Right")\n\nprint("Setup done! Add the game loop next!")' },
+      { title: 'Superhero Card — HTML+CSS', lang: 'HTML', desc: 'Design a glowing superhero card!', steps: ['1. Create dark card container', '2. Add hero avatar and name', '3. List 3 superpowers', '4. Add animated stat bars', '5. Add neon glow (box-shadow)', '6. Add hover scale animation'], hints: ['box-shadow makes neon glow', 'Width % on a div = stat bar', '@keyframes for animations', 'linear-gradient for backgrounds'], code: '<!DOCTYPE html>\n<html><head><title>Hero Card</title>\n<style>\n  body{background:#0a0a1a;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;font-family:Arial}\n  .card{background:linear-gradient(135deg,#1a1a3a,#0d0d25);border:2px solid #00ff88;border-radius:20px;padding:30px;width:320px;text-align:center;box-shadow:0 0 40px rgba(0,255,136,.3);transition:transform .3s}\n  .card:hover{transform:scale(1.05)}\n  .av{font-size:80px;margin-bottom:15px}\n  .nm{font-size:24px;color:#00ff88;font-weight:bold;text-shadow:0 0 10px #00ff88;margin-bottom:5px}\n  .ti{color:#888;margin-bottom:20px}\n  .pw{color:#00d4ff;text-align:left;margin:5px 0;font-weight:bold}\n  .bg{background:#222;border-radius:10px;height:8px;margin:4px 0 12px}\n  .br{height:100%;border-radius:10px;background:linear-gradient(90deg,#00ff88,#00d4ff);animation:grow 1.5s ease forwards}\n  @keyframes grow{from{width:0}}\n</style></head><body>\n  <div class="card">\n    <div class="av">🦸</div>\n    <div class="nm">ANIRUDHA</div>\n    <div class="ti">The Code Wizard ⚡</div>\n    <div class="pw">⚡ Super Speed</div>\n    <div class="bg"><div class="br" style="width:90%"></div></div>\n    <div class="pw">🧠 Genius IQ</div>\n    <div class="bg"><div class="br" style="width:95%"></div></div>\n    <div class="pw">♟️ Chess Master</div>\n    <div class="bg"><div class="br" style="width:85%"></div></div>\n  </div>\n</body></html>' },
+      { title: 'Password Hacker — Python', lang: 'PYTHON', desc: 'Hacker-themed guessing game with lives and hints!', steps: ['1. Generate secret 4-digit code', '2. Give player 10 lives', '3. Accept guess each round', '4. Give HOT/COLD hints', '5. Show remaining lives', '6. Show win or lose message'], hints: ['random.randint(1000,9999)', 'abs(guess-secret) = distance', 'Use while loop for rounds', 'Subtract 1 life each wrong guess'], code: '# Password Hacker Game\nimport random\n\nprint("=" * 40)\nprint("  CYBER HACK TERMINAL v1.0")\nprint("=" * 40)\n\nsecret = random.randint(1000, 9999)\nlives = 10\nwon = False\nprint("Locked! You have", lives, "attempts.")\nprint()\n\nwhile lives > 0:\n    try:\n        guess = int(input("["+str(lives)+" lives] Code: "))\n    except:\n        print("Numbers only!"); continue\n    if guess == secret:\n        won = True; break\n    lives -= 1\n    diff = abs(guess - secret)\n    if diff < 50: print("BLAZING HOT!")\n    elif diff < 200: print("Very warm!")\n    elif diff < 500: print("Lukewarm...")\n    else: print("Ice cold!")\n    if lives > 0: print("("+str(lives)+" left)\\n")\n\nif won: print("ACCESS GRANTED!")\nelse: print("LOCKED. Code was:", secret)' },
+      { title: 'Trivia Battle Arena — HTML+JS', lang: 'HTML', desc: '2-player trivia game with timers and winner screen!', steps: ['1. Store 5 quiz questions in JS', '2. Show question and 4 buttons', '3. Add 10-second countdown', '4. Score correct answers', '5. Alternate P1 and P2 turns', '6. Show animated winner at end'], hints: ['Store questions as JS objects', 'setInterval() for countdown', 'Switch turns after each question', 'innerHTML to update score'], code: '<!DOCTYPE html>\n<html><head><title>Trivia!</title>\n<style>body{background:#0a0a1a;color:#fff;font-family:Arial;text-align:center;padding:30px;margin:0}h1{color:#00ff88;font-size:32px;margin-bottom:15px}.box{background:#1a1a3a;border-radius:16px;padding:30px;max-width:600px;margin:0 auto;border:1px solid #333}.score{color:#ffe600;font-size:20px;font-weight:bold;margin-bottom:15px}.timer{font-size:48px;color:#ff0099;font-weight:bold}h2{font-size:20px;min-height:80px;color:#fff;margin:15px 0;line-height:1.6}button{background:linear-gradient(135deg,#00ff88,#00d4ff);color:#000;border:none;padding:12px 20px;border-radius:10px;font-weight:bold;font-size:16px;cursor:pointer;margin:5px}.fb{color:#00ff88;font-weight:bold;min-height:30px;font-size:18px;margin-top:10px}</style></head><body>\n<h1>TRIVIA BATTLE!</h1>\n<div class="box">\n<div class="score">P1:<span id="p1">0</span> | P2:<span id="p2">0</span></div>\n<div class="timer" id="tm">10</div>\n<h2 id="q">Loading...</h2>\n<div id="opts"></div>\n<div class="fb" id="fb"></div>\n</div>\n<script>\nvar qs=[{q:"HTML stands for?",opts:["Hyper Text Markup Language","Hot Tech","High Transfer","Heavy Text"],a:0},{q:"Python comment?",opts:["//","<!--","**","#"],a:3},{q:"CSS styles?",opts:["Logic","Database","Appearance","Server"],a:2},{q:"Variable is?",opts:["Bug","Stores data","Button","Loop"],a:1},{q:"Big heading?",opts:["h6","big","bold","h1"],a:3}];\nvar cur=0,p1=0,p2=0,turn=1,tmr,time=10;\nfunction loadQ(){clearInterval(tmr);if(cur>=qs.length){end();return;}var q=qs[cur];document.getElementById("q").textContent=(turn===1?"P1: ":"P2: ")+q.q;document.getElementById("fb").textContent="";var o=document.getElementById("opts");o.innerHTML="";q.opts.forEach(function(x,i){var b=document.createElement("button");b.textContent=x;b.onclick=function(){ans(i);};o.appendChild(b);});time=10;document.getElementById("tm").textContent=time;tmr=setInterval(function(){time--;document.getElementById("tm").textContent=time;if(time<=0){clearInterval(tmr);next();}},1000);}\nfunction ans(i){clearInterval(tmr);if(qs[cur].a===i){if(turn===1)p1++;else p2++;document.getElementById("fb").textContent="Correct!";}else{document.getElementById("fb").textContent="Wrong!";}document.getElementById("p1").textContent=p1;document.getElementById("p2").textContent=p2;setTimeout(next,1200);}\nfunction next(){if(turn===2)cur++;turn=turn===1?2:1;loadQ();}\nfunction end(){document.querySelector(".box").innerHTML="<h2 style=\'color:#ffe600;font-size:32px\'>"+(p1>p2?"P1 WINS!":p2>p1?"P2 WINS!":"TIE!")+"</h2><p>P1:"+p1+" P2:"+p2+"</p><button onclick=\'location.reload()\'>Play Again</button>";}\nloadQ();\n<\/script></body></html>  '},
+      { title: 'AI Chatbot — Python', lang: 'PYTHON', desc: 'Chatbot that tells jokes and remembers your name!', steps: ['1. Ask for user name first', '2. Build keyword-response dictionary', '3. Match input using in keyword', '4. Add list of random jokes', '5. Add fallback for unknown input', '6. Loop until user says bye'], hints: ['input().lower() normalizes text', "Check if keyword 'in' user message", 'random.choice() for jokes', 'Dictionary maps keywords to replies'], code: '# AI Chatbot\nimport random\n\nname = input("Bot: Your name? > ")\nprint("Bot: Hi " + name + "! I am CodeBot!")\nprint("Bot: Ask me anything! Type bye to quit.")\nprint()\n\njokes = ["Dark mode? Light attracts bugs!","Quit? Did not get arrays!","Needed a break — now Kit-Kat ads."]\nresponses = {"hello":"Hey "+name+"! Ready to code?","hi":"Sup "+name+"!","how are you":"100% CPU — great!","python":"Python is beginner-friendly!","html":"HTML builds websites!","css":"CSS makes sites beautiful!","joke":None,"bye":"See ya "+name+"! Keep coding!","help":"Ask about Python, HTML or CSS!"}\n\nwhile True:\n    user = input(name+": ").lower().strip()\n    if not user: continue\n    replied = False\n    for key in responses:\n        if key in user:\n            if key=="joke": print("Bot: "+random.choice(jokes))\n            elif key=="bye": print("Bot: "+responses[key]); exit()\n            else: print("Bot: "+responses[key])\n            replied=True; break\n    if not replied: print("Bot: Try asking about Python!")\n    print()' },
+      { title: 'Space Invaders — JS+Canvas', lang: 'HTML', desc: 'Shoot aliens, dodge bullets, track score and lives!', steps: ['1. Set up HTML canvas', '2. Draw player spaceship', '3. Add arrow + space controls', '4. Spawn alien grid', '5. Move aliens left and right', '6. Detect bullet-alien collisions'], hints: ['requestAnimationFrame for game loop', 'Bullets in an array of objects', 'Collision: check rectangle overlap', 'Move all aliens as one group'], code: '<!DOCTYPE html>\n<html><head><title>Space Invaders!</title>\n<style>*{margin:0;padding:0}body{background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;font-family:monospace}#ui{color:#00ff88;font-size:20px;margin-bottom:15px}canvas{border:2px solid #00ff88;display:block}p{color:#444;margin-top:15px;font-size:14px}</style></head><body>\n<div id="ui">SCORE:<span id="sc">0</span> LIVES:<span id="lv">3</span></div>\n<canvas id="c" width="700" height="480"></canvas>\n<p>Arrow keys to move | SPACE to shoot</p>\n<script>\nvar cv=document.getElementById("c"),ctx=cv.getContext("2d"),score=0,lives=3,go=false;\nvar pl={x:330,y:430,w:40,h:20,sp:6},bl=[],ab=[],al=[],aDir=1,aSpd=1.2,ls=0;\nfunction mk(){al=[];for(var r=0;r<4;r++)for(var c=0;c<10;c++)al.push({x:60+c*58,y:60+r*50,w:30,h:25,alive:true,e:r<2?"👾":"🤖"});}\nmk();var keys={};\ndocument.addEventListener("keydown",function(e){keys[e.code]=true;if(e.code==="Space"){e.preventDefault();if(Date.now()-ls>380){ls=Date.now();bl.push({x:pl.x+pl.w/2-3,y:pl.y,w:6,h:14});}}});\ndocument.addEventListener("keyup",function(e){keys[e.code]=false;});\nfunction hit(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;}\nfunction update(){if(go)return;if(keys["ArrowLeft"]&&pl.x>0)pl.x-=pl.sp;if(keys["ArrowRight"]&&pl.x<cv.width-pl.w)pl.x+=pl.sp;for(var i=bl.length-1;i>=0;i--){bl[i].y-=9;if(bl[i].y<0){bl.splice(i,1);continue;}for(var j=0;j<al.length;j++){if(al[j].alive&&hit(bl[i],al[j])){al[j].alive=false;bl.splice(i,1);score+=10;document.getElementById("sc").textContent=score;break;}}}var alive=al.filter(function(a){return a.alive;});if(!alive.length){mk();aSpd+=0.3;}if(Math.random()<0.015&&alive.length){var a=alive[Math.floor(Math.random()*alive.length)];ab.push({x:a.x+a.w/2-3,y:a.y+a.h,w:6,h:12});}for(var i=ab.length-1;i>=0;i--){ab[i].y+=4;if(ab[i].y>cv.height){ab.splice(i,1);continue;}if(hit(ab[i],pl)){ab.splice(i,1);lives--;document.getElementById("lv").textContent=lives;if(lives<=0)go=true;}}var edge=false;for(var i=0;i<al.length;i++){if(!al[i].alive)continue;al[i].x+=aDir*aSpd;if(al[i].x<=0||al[i].x+al[i].w>=cv.width)edge=true;}if(edge){aDir*=-1;for(var i=0;i<al.length;i++)if(al[i].alive)al[i].y+=18;}}\nfunction draw(){ctx.clearRect(0,0,cv.width,cv.height);ctx.fillStyle="#fff";for(var i=0;i<60;i++)ctx.fillRect((i*137)%700,(i*89)%480,1,1);ctx.fillStyle="#00ff88";ctx.fillRect(pl.x,pl.y,pl.w,pl.h);ctx.fillRect(pl.x+15,pl.y-10,10,10);for(var i=0;i<bl.length;i++)ctx.fillRect(bl[i].x,bl[i].y,bl[i].w,bl[i].h);ctx.fillStyle="#ff0099";for(var i=0;i<ab.length;i++)ctx.fillRect(ab[i].x,ab[i].y,ab[i].w,ab[i].h);ctx.font="22px serif";for(var i=0;i<al.length;i++)if(al[i].alive)ctx.fillText(al[i].e,al[i].x,al[i].y+al[i].h);if(go){ctx.fillStyle="rgba(0,0,0,.8)";ctx.fillRect(0,0,cv.width,cv.height);ctx.fillStyle="#ff0099";ctx.font="bold 48px monospace";ctx.textAlign="center";ctx.fillText("GAME OVER",cv.width/2,cv.height/2-20);ctx.fillStyle="#fff";ctx.font="24px monospace";ctx.fillText("Score:"+score,cv.width/2,cv.height/2+30);ctx.textAlign="left";}}\n(function loop(){update();draw();requestAnimationFrame(loop);})();\n</script></body></html>' },
+      { title: 'Free Code Zone!', lang: 'HTML', desc: 'Write any code! Experiment and have fun!', steps: ['Write any HTML or JS', 'Try changing colors', 'Add a button with onclick', 'Break things and learn!'], hints: ["document.body.style.background='red'", 'Add a button that shows alert', 'No rules here — just explore!', 'Any HTML renders instantly'], code: '<!DOCTYPE html>\n<html><head>\n<style>*{margin:0;padding:0}body{background:#0a0a1a;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:Arial}h1{color:#00ff88;font-size:48px;font-weight:900;text-align:center;text-shadow:0 0 20px #00ff88;animation:gl 2s ease-in-out infinite;line-height:1.4}@keyframes gl{0%,100%{text-shadow:0 0 20px #00ff88}50%{text-shadow:0 0 50px #00ff88,0 0 90px #00d4ff}}</style></head><body>\n<h1>Hello Anirudha!<br>Start coding here! 🚀</h1>\n</body></html>' }
+    ];
+
+    var curCh = 0, totalXP = 0;
+
+    function loadChallenge(idx) {
+      curCh = idx;
+      var c = chs[idx];
+      document.getElementById('codeInput').value = c.code;
+      document.getElementById('edTitle').textContent = c.title;
+      document.getElementById('lpill').textContent = c.lang;
+      document.getElementById('estat').textContent = 'Ready — write your code and hit RUN!';
+      document.getElementById('chSel').value = idx;
+      document.getElementById('mTitle').textContent = c.title;
+      document.getElementById('mDesc').textContent = c.desc;
+      document.getElementById('mSteps').innerHTML = c.steps.map(function (s) { return '<li>' + s + '</li>'; }).join('');
+      document.getElementById('hList').innerHTML = c.hints.map(function (h) { return '<div class="hint">💡 ' + h + '</div>'; }).join('');
+      clearOut();
+      updateLN();
+      document.querySelectorAll('.ed-tab').forEach(function (t) { t.classList.remove('active'); });
+      document.querySelector('.ed-tab').classList.add('active');
+      document.getElementById('cPanel').style.display = 'flex';
+      document.getElementById('mPanel').style.display = 'none';
+      document.getElementById('hPanel').style.display = 'none';
+      document.getElementById('editor').scrollIntoView({ behavior: 'smooth' });
+      showToast('Challenge loaded! Start coding! 💻');
+    }
+
+    function switchTab(tab, btn) {
+      document.querySelectorAll('.ed-tab').forEach(function (t) { t.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('cPanel').style.display = (tab === 'code') ? 'flex' : 'none';
+      document.getElementById('mPanel').style.display = (tab === 'mission') ? 'block' : 'none';
+      document.getElementById('hPanel').style.display = (tab === 'hints') ? 'block' : 'none';
+    }
+
+    function updateLN() {
+      var n = document.getElementById('codeInput').value.split('\n').length, h = '';
+      for (var i = 1; i <= n; i++)h += '<span>' + i + '</span>';
+      document.getElementById('lnums').innerHTML = h;
+    }
+    document.getElementById('codeInput').addEventListener('input', updateLN);
+    document.getElementById('codeInput').addEventListener('keydown', function (e) {
+      if (e.key === 'Tab') { e.preventDefault(); var t = e.target, s = t.selectionStart; t.value = t.value.substring(0, s) + '  ' + t.value.substring(t.selectionEnd); t.selectionStart = t.selectionEnd = s + 2; updateLN(); }
+    });
+
+    function addOut(txt, cls) { var o = document.getElementById('outText'), s = document.createElement('span'); if (cls) s.className = cls; s.textContent = txt; o.appendChild(s); o.appendChild(document.createElement('br')); o.scrollTop = o.scrollHeight; }
+
+    function runCode() {
+      var code = document.getElementById('codeInput').value, lang = chs[curCh].lang;
+      clearOut();
+      if (lang === 'PYTHON') { addOut('Python runs in IDLE, Replit or VS Code — not a browser!', 'ob'); addOut('Go to replit.com, paste your code and click Run!', 'ob'); addOut('Your code has ' + code.split('\n').length + ' lines — ready to copy!', 'og'); document.getElementById('estat').textContent = 'Copy and run in Replit!'; return; }
+      addOut('Running HTML preview...', 'ob');
+      var old = document.getElementById('pFrame'); if (old) old.remove();
+      var blob = new Blob([code], { type: 'text/html' }), url = URL.createObjectURL(blob), frame = document.createElement('iframe');
+      frame.id = 'pFrame'; frame.src = url; frame.style.cssText = 'width:100%;height:350px;border:none;border-radius:0 0 16px 16px;background:#fff;display:block;';
+      document.querySelector('.ed-box').appendChild(frame);
+      addOut('Live preview loaded below!', 'og');
+      document.getElementById('estat').textContent = 'Preview running below!';
+      setTimeout(function () { URL.revokeObjectURL(url); }, 5000);
+    }
+
+    function clearOut() { var f = document.getElementById('pFrame'); if (f) f.remove(); document.getElementById('outText').innerHTML = '<span class="ob">// Cleared. Ready to run!</span>'; }
+
+    function submitCode() {
+      var xps = [150, 120, 200, 250, 350, 500, 50], xp = xps[curCh] || 50;
+      totalXP += xp; spawnParticles();
+      showToast('🏆 +' + xp + ' XP earned! Total: ' + totalXP + ' XP!');
+      document.getElementById('myXp').textContent = '⭐ ' + totalXP + ' XP — Keep going!';
+      document.getElementById('estat').textContent = 'Submitted! +' + xp + ' XP earned!';
+    }
+
+    function spawnParticles() {
+      var cols = ['#00ff88', '#00d4ff', '#ff0099', '#ffe600', '#b44dff'], cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+      for (var i = 0; i < 25; i++) { var p = document.createElement('div'); p.className = 'particle'; var a = Math.random() * Math.PI * 2, d = 80 + Math.random() * 200; p.style.cssText = 'left:' + cx + 'px;top:' + cy + 'px;width:' + (6 + Math.random() * 6) + 'px;height:' + (6 + Math.random() * 6) + 'px;background:' + cols[i % 5] + ';--tx:' + Math.cos(a) * d + 'px;--ty:' + Math.sin(a) * d + 'px;'; document.body.appendChild(p); setTimeout(function (el) { return function () { el.remove(); }; }(p), 850); }
+    }
+
+    var qs = [
+      { q: 'What does HTML stand for?', opts: ['Hyper Text Markup Language', 'High Tech Modern Language', 'Hot Tamale Machine Learning', 'Hyper Transfer Mode Link'], a: 0, xp: 50 },
+      { q: 'Which Python keyword prints to screen?', opts: ['show()', 'display()', 'print()', 'write()'], a: 2, xp: 50 },
+      { q: 'What does a for loop do?', opts: ['Deletes code', 'Repeats code many times', 'Creates a variable', 'Stops the program'], a: 1, xp: 50 },
+      { q: 'Which HTML tag makes a big heading?', opts: ['big', 'bold', 'h6', 'h1'], a: 3, xp: 50 },
+      { q: 'What does CSS stand for?', opts: ['Cool Style Sheets', 'Cascading Style Sheets', 'Computer Style System', 'Creative Script Syntax'], a: 1, xp: 50 },
+      { q: 'Python comment symbol?', opts: ['//', '<!--', '**', '#'], a: 3, xp: 50 },
+      { q: 'What is a variable in coding?', opts: ['A type of bug', 'A box that stores data', 'A website button', 'A kind of loop'], a: 1, xp: 50 }
+    ];
+    var curQ = 0, qScore = 0, streak = 0, qAnswered = false;
+
+    function loadQ() {
+      if (curQ >= qs.length) {
+        document.getElementById('qq').textContent = 'QUIZ COMPLETE!';
+        document.getElementById('qopts').innerHTML = '<div style="grid-column:1/-1;text-align:center"><p style="color:#ffe600;font-size:22px;font-weight:900;margin-bottom:20px">TOTAL: ' + qScore + ' XP</p><button class="btn-g" style="font-size:16px;padding:14px 30px" onclick="restartQ()">Play Again</button></div>';
+        document.getElementById('qfb').textContent = ''; document.getElementById('qst').textContent = '';
+        document.getElementById('qcnt').textContent = 'DONE!'; document.getElementById('pgbar').style.width = '100%';
+        if (qScore > 0) { totalXP += qScore; document.getElementById('myXp').textContent = '⭐ ' + totalXP + ' XP — Keep going!'; showToast('Quiz done! +' + qScore + ' XP! 🏆'); }
+        return;
+      }
+      qAnswered = false;
+      var q = qs[curQ];
+      document.getElementById('qq').textContent = q.q;
+      document.getElementById('qfb').textContent = '';
+      document.getElementById('qst').textContent = streak >= 2 ? '🔥 ' + streak + 'x STREAK! Bonus XP active!' : '';
+      document.getElementById('qcnt').textContent = 'Q ' + (curQ + 1) + ' of ' + qs.length;
+      document.getElementById('pgbar').style.width = (curQ / qs.length * 100) + '%';
+      var opts = document.getElementById('qopts'); opts.innerHTML = '';
+      q.opts.forEach(function (o, i) { var b = document.createElement('button'); b.className = 'qopt'; b.textContent = o; b.onclick = function () { pickA(i); }; opts.appendChild(b); });
+    }
+
+    function pickA(idx) {
+      if (qAnswered) return; qAnswered = true;
+      var q = qs[curQ], btns = document.querySelectorAll('.qopt');
+      btns.forEach(function (b) { b.disabled = true; });
+      btns[q.a].classList.add('correct');
+      var fb = document.getElementById('qfb');
+      if (idx === q.a) { streak++; var bonus = streak >= 3 ? 30 : streak >= 2 ? 15 : 0, earned = q.xp + bonus; qScore += earned; fb.textContent = bonus ? 'Correct! +' + q.xp + ' XP + ' + bonus + ' streak bonus!' : 'Correct! +' + q.xp + ' XP!'; fb.style.color = '#00ff88'; }
+      else { streak = 0; btns[idx].classList.add('wrong'); fb.textContent = 'Wrong! Check the green answer.'; fb.style.color = '#ff0099'; }
+      document.getElementById('qscr').textContent = qScore;
+      curQ++; setTimeout(loadQ, 2000);
+    }
+
+    function restartQ() { curQ = 0; qScore = 0; streak = 0; document.getElementById('qscr').textContent = 0; loadQ(); }
+
+    loadChallenge(0);
+    loadQ();
+  </script>
+</body>
+
+</html>
